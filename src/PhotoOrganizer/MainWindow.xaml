@@ -2,54 +2,58 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:PhotoOrganizer"
         Title="MainWindow" Height="350" Width="525">
-	<StackPanel>
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="Auto"/>
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition/>
-				<RowDefinition/>
-				<RowDefinition/>
-				<RowDefinition />
-				<RowDefinition />
-				<RowDefinition />
-			</Grid.RowDefinitions>
-			<Label Grid.Column="0" Grid.Row="0" Content="Source: "/>
-			<TextBox Grid.Column="1" Grid.Row="0"/>
-			<Button Grid.Column="2" Grid.Row="0" Style="{DynamicResource MetroCircleButtonStyle}">
-				<Rectangle Height="16" Width="16">
-					<Rectangle.Fill>
-						<VisualBrush Visual="{DynamicResource appbar_folder_open}"/>
-					</Rectangle.Fill>
-				</Rectangle>
-			</Button>
-			<Label Grid.Column="0" Grid.Row="1" Content="Destination: "/>
-			<TextBox Grid.Column="1" Grid.Row="1"/>
-			<Button Grid.Column="2" Grid.Row="1" Style="{DynamicResource MetroCircleButtonStyle}">
-				<Rectangle Height="16" Width="16">
-					<Rectangle.Fill>
-						<VisualBrush Visual="{DynamicResource appbar_folder_open}"/>
-					</Rectangle.Fill>
-				</Rectangle>
-			</Button>
-			<Label Grid.Column="0" Grid.Row="2" Content="Rename: "/>
-			<TextBox Grid.Column="1" Grid.Row="2"/>
-			<Label Grid.Column="1" Grid.Row="3" Content="todo"/>
-			<CheckBox Grid.Column="1" Grid.Row="4" Content="Make files read only"/>
-			<Grid Grid.ColumnSpan="3" Grid.Row="5">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition/>
-					<ColumnDefinition/>
-					<ColumnDefinition/>
-				</Grid.ColumnDefinitions>
-				<Button Grid.Column="0" Content="Preview"/>
-				<Button Grid.Column="1" Content="Copy"/>
-				<Button Grid.Column="2" Content="Move"/>
-			</Grid>
-		</Grid>
-	</StackPanel>
+   <controls:MetroWindow.DataContext>
+      <local:MainWindowViewModel/>
+   </controls:MetroWindow.DataContext>
+   <StackPanel>
+      <Grid>
+         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+         </Grid.ColumnDefinitions>
+         <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+         </Grid.RowDefinitions>
+         <Label Grid.Column="0" Grid.Row="0" Content="Source: " Grid.ColumnSpan="2" Margin="0,5,423.667,21" Grid.RowSpan="2"/>
+         <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SourceDirectory.Value, UpdateSourceTrigger=PropertyChanged}"/>
+         <Button Grid.Column="2" Grid.Row="0" Style="{DynamicResource MetroCircleButtonStyle}">
+            <Rectangle Height="16" Width="16">
+               <Rectangle.Fill>
+                  <VisualBrush Visual="{DynamicResource appbar_folder_open}"/>
+               </Rectangle.Fill>
+            </Rectangle>
+         </Button>
+         <Label Grid.Column="0" Grid.Row="1" Content="Destination: "/>
+         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding TargetDirectory.Value, UpdateSourceTrigger=PropertyChanged}"/>
+         <Button Grid.Column="2" Grid.Row="1" Style="{DynamicResource MetroCircleButtonStyle}">
+            <Rectangle Height="16" Width="16">
+               <Rectangle.Fill>
+                  <VisualBrush Visual="{DynamicResource appbar_folder_open}"/>
+               </Rectangle.Fill>
+            </Rectangle>
+         </Button>
+         <Label Grid.Column="0" Grid.Row="2" Content="Rename: "/>
+         <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding RenamePattern.Value, UpdateSourceTrigger=PropertyChanged}"/>
+         <Label Grid.Column="1" Grid.Row="3" Content="todo"/>
+         <CheckBox Grid.Column="1" Grid.Row="4" Content="Make files read only"/>
+         <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5">
+            <Grid.ColumnDefinitions>
+               <ColumnDefinition/>
+               <ColumnDefinition/>
+               <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Preview" Command="{Binding PreviewCommand}"/>
+            <Button Grid.Column="1" Content="Copy" Command="{Binding CopyCommand}"/>
+            <Button Grid.Column="2" Content="Move" Command="{Binding MoveCommand}"/>
+         </Grid>
+      </Grid>
+   </StackPanel>
 </controls:MetroWindow>

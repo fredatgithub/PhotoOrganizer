@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Globalization;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PhotoOrganizer.Properties;
 using System;
@@ -43,7 +44,7 @@ namespace PhotoOrganizer
                 {
                    Path = d.Value<string>("SourceFile"),
                    Size = d.Value<int>("FileSize"),
-                   Timestamp = DateTime.ParseExact(d.Value<string>("DateTimeOriginal"), "yyyyMMddhhmmss", null)
+                   Timestamp = DateTime.ParseExact(d.Value<string>("DateTimeOriginal"), "yyyyMMddHHmmss", null)
                 };
       }
 
