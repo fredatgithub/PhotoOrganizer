@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PhotoOrganizer.Properties;
 using System;
@@ -13,7 +12,7 @@ namespace PhotoOrganizer
 {
    public class ExifReader
    {
-      public IEnumerable<ExifFile> Scan(string directory)
+      public IReadOnlyCollection<SourceFile> Scan(string directory)
       {
          var tempDir = Path.GetTempPath();
          var exiftoolPath = Path.Combine(tempDir, "exiftool.exe");
@@ -39,20 +38,21 @@ namespace PhotoOrganizer
          process.Start();
          process.WaitForExit();
          var enumerable = JsonConvert.DeserializeObject<IEnumerable<JObject>>(process.StandardOutput.ReadToEnd());
-         return from d in enumerable
-                select new ExifFile
-                {
-                   Path = d.Value<string>("SourceFile"),
-                   Size = d.Value<int>("FileSize"),
-                   Timestamp = DateTime.ParseExact(d.Value<string>("DateTimeOriginal"), "yyyyMMddHHmmss", null)
-                };
+         return enumerable
+            .Select(x => new SourceFile
+            {
+               Path = x.Value<string>("SourceFile"),
+               Size = x.Value<int>("FileSize"),
+               Timestamp = DateTime.ParseExact(x.Value<string>("DateTimeOriginal"), "yyyyMMddHHmmss", null)
+            })
+            .ToList();
       }
 
-      public class ExifFile
+      public class SourceFile
       {
          public string Path { get; set; }
          public DateTime Timestamp { get; set; }
-         public int Size { get; set; }
+         public long Size { get; set; }
       }
    }
 }

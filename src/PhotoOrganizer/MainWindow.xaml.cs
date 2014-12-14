@@ -24,5 +24,10 @@ namespace PhotoOrganizer
 		{
 			InitializeComponent();
 		}
+
+	    private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
+	    {
+	       ((MainWindowViewModel) DataContext).LoadConfig();
+	    }
 	}
 }

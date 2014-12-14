@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:PhotoOrganizer"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525" Loaded="MainWindow_OnLoaded">
    <controls:MetroWindow.DataContext>
       <local:MainWindowViewModel/>
    </controls:MetroWindow.DataContext>
@@ -48,11 +48,9 @@
             <Grid.ColumnDefinitions>
                <ColumnDefinition/>
                <ColumnDefinition/>
-               <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Preview" Command="{Binding PreviewCommand}"/>
-            <Button Grid.Column="1" Content="Copy" Command="{Binding CopyCommand}"/>
-            <Button Grid.Column="2" Content="Move" Command="{Binding MoveCommand}"/>
+            <Button Grid.Column="0" Content="Copy" Command="{Binding CopyCommand}"/>
+            <Button Grid.Column="1" Content="Move" Command="{Binding MoveCommand}"/>
          </Grid>
       </Grid>
    </StackPanel>
