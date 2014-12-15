@@ -1,9 +1,9 @@
-﻿using Handyman.Wpf;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.IO;
 using System.Windows.Input;
+using Handyman.Wpf;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace PhotoOrganizer
 {
@@ -33,13 +33,14 @@ namespace PhotoOrganizer
       private void Execute(WorkerBase worker)
       {
          SaveConfig();
-         new Executor
-         {
-            SourceDirectory = SourceDirectory,
-            TargetDirectory = TargetDirectory,
-            RenamePattern = RenamePattern,
-            MarkTargetFilesAsReadOnly = MarkTargetFilesAsReadOnly
-         }.Execute(worker);
+         var executor = new Executor
+                             {
+                                SourceDirectory = SourceDirectory,
+                                TargetDirectory = TargetDirectory,
+                                RenamePattern = RenamePattern,
+                                MarkTargetFilesAsReadOnly = MarkTargetFilesAsReadOnly
+                             };
+         executor.Execute(worker);
       }
 
       private bool CanExecute()

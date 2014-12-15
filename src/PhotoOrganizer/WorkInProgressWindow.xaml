@@ -1,0 +1,20 @@
+﻿<controls:MetroWindow x:Class="PhotoOrganizer.ProgressWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:PhotoOrganizer"
+        Title="Progress" Height="175" Width="500" ShowMinButton="False" ShowMaxRestoreButton="False" SizeToContent="Height" ResizeMode="NoResize">
+   <controls:MetroWindow.DataContext>
+      <local:WorkInProgressWindowViewModel/>
+   </controls:MetroWindow.DataContext>
+   <Grid>
+      <Grid.RowDefinitions>
+         <RowDefinition Height="*"/>
+         <RowDefinition Height="Auto"/>
+         <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <Label Grid.Row="0" Content="{Binding Info.Value}" Margin="10" HorizontalAlignment="Stretch"/>
+      <controls:MetroProgressBar Grid.Row="1" IsIndeterminate="{Binding IsIndeterminate.Value}" Value="{Binding Progress.Value}" Maximum="{Binding TotalWork.Value}" Margin="10,5"/>
+      <Button Grid.Row="2" HorizontalAlignment="Right" Content="Cancel" IsCancel="True" Margin="10"/>
+   </Grid>
+</controls:MetroWindow>
